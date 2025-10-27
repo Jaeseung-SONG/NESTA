@@ -1,2 +1,4 @@
-# TWAS_Diffusion
-Scripts for network-wide diffusion of genetically computed gene expression weights from TWAS
+# NESTA
+Scripts for running network-wise expansion for single-cell-type-specific association (NESTA)
+
+
