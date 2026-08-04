@@ -65,7 +65,7 @@ run_one() {
   else
     args+=(--Save_kernel_rds "$kernel")
   fi
-  if [[ "$mode" == "m2_expression_weighted" ]]; then
+  if [[ "$mode" == "nesta_expression_weighted" ]]; then
     args+=(--Expression_reference_net "$expr_ref")
   fi
   if R_LIBS="$RLIB" Rscript "${args[@]}" > "$stdout" 2> "$stderr"; then
@@ -91,6 +91,6 @@ register_condition() {
 }
 
 register_condition string_default_twas_only "$DEFAULT_THR" twas_only string_default
-register_condition string_default_m2_expression_weighted "$DEFAULT_THR" m2_expression_weighted string_default
+register_condition string_default_nesta_expression_weighted "$DEFAULT_THR" nesta_expression_weighted string_default
 register_condition string_coex_comparable_twas_only "$COEX_THR" twas_only string_coex_comparable
-register_condition string_coex_comparable_m2_expression_weighted "$COEX_THR" m2_expression_weighted string_coex_comparable
+register_condition string_coex_comparable_nesta_expression_weighted "$COEX_THR" nesta_expression_weighted string_coex_comparable

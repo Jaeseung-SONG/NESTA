@@ -74,9 +74,9 @@ option_list = list(
   make_option("--Analysis_name", action = 'store', default = NULL, type = 'character',
               help = 'Please provide the name of the analysis. It can be cell type name or others'),
   make_option("--Initial_weight_mode", action = 'store', default = 'auto', type = 'character',
-              help = 'Initial weight mode: auto, twas_only, or m2_expression_weighted. Default auto preserves existing behavior.'),
+              help = 'Initial weight mode: auto, twas_only, or nesta_expression_weighted. Default auto preserves existing behavior.'),
   make_option("--Expression_reference_net", action = 'store', default = NA, type = 'character',
-              help = 'Optional expression network RDS used only to compute cell-type mean expression when Is_expression_network is FALSE and Initial_weight_mode is m2_expression_weighted.'),
+              help = 'Optional expression network RDS used only to compute cell-type mean expression when Is_expression_network is FALSE and Initial_weight_mode is nesta_expression_weighted.'),
   make_option("--Kernel_rds", action = 'store', default = NA, type = 'character',
               help = 'Optional precomputed diffuStats kernel RDS for the supplied reference network.'),
   make_option("--Save_kernel_rds", action = 'store', default = NA, type = 'character',
@@ -128,10 +128,10 @@ NESTA <- function(TWAS_res, Refer.net, Is.expression, Expression.slot,
   Is.expression <- parse_logical_flag(Is.expression, '--Is_expression_network')
   Initial.weight.mode <- tolower(Initial.weight.mode)
   if(Initial.weight.mode == 'auto'){
-    Initial.weight.mode <- ifelse(Is.expression, 'm2_expression_weighted', 'twas_only')
+    Initial.weight.mode <- ifelse(Is.expression, 'nesta_expression_weighted', 'twas_only')
   }
-  if(!Initial.weight.mode %in% c('twas_only', 'm2_expression_weighted')){
-    stop("Error: Initial_weight_mode must be auto, twas_only, or m2_expression_weighted.")
+  if(!Initial.weight.mode %in% c('twas_only', 'nesta_expression_weighted')){
+    stop("Error: Initial_weight_mode must be auto, twas_only, or nesta_expression_weighted.")
   }
 
   read_mean_expression <- function(expr.path, expr.slot){
@@ -187,9 +187,9 @@ NESTA <- function(TWAS_res, Refer.net, Is.expression, Expression.slot,
         graph.adjacency(., mode = 'undirected', weighted = T)
     }
 
-    if(Initial.weight.mode == 'm2_expression_weighted'){
+    if(Initial.weight.mode == 'nesta_expression_weighted'){
       if(is.na(Expression.reference.net) || !file.exists(Expression.reference.net)){
-        stop("Error: Expression_reference_net is required for m2_expression_weighted mode with Is_expression_network FALSE.")
+        stop("Error: Expression_reference_net is required for nesta_expression_weighted mode with Is_expression_network FALSE.")
       }
       Mean.expr <- read_mean_expression(Expression.reference.net, Expression.slot)
     }
@@ -230,7 +230,7 @@ NESTA <- function(TWAS_res, Refer.net, Is.expression, Expression.slot,
   cat('Nodes with TWAS-derived nonzero initial weight: ', sum(tmp.score$weight != 0), '\n')
   cat('Zero-imputed network nodes without nonzero TWAS weight: ', sum(tmp.score$weight == 0), '\n')
 
-  if(Initial.weight.mode == 'm2_expression_weighted'){
+  if(Initial.weight.mode == 'nesta_expression_weighted'){
 
     cat('Generating cell type-specific initial weight vector.\n')
 

@@ -47,13 +47,13 @@ writeLines(c(
   "",
   "For `twas_only`, `comb.weight = TWAS.Z` for matched genes and 0 for missing genes.",
   "",
-  "For `m2_expression_weighted`, mean expression is left-joined to the full graph node list. Nodes without expression or TWAS statistics are retained and assigned zero expression/TWAS contribution, so they remain zero-initialized rather than being dropped.",
+  "For `nesta_expression_weighted`, mean expression is left-joined to the full graph node list. Nodes without expression or TWAS statistics are retained and assigned zero expression/TWAS contribution, so they remain zero-initialized rather than being dropped.",
   "",
   "## STRING/PPI mode",
   "",
   "`--Is_expression_network NO` sources `/home/js/NESTA/Analysis/string_ppi_utils.R` and reads full threshold-filtered STRING edge tables through `read_ppi_graph`. The corrected pipeline passes `STRING_human_v12.0_score_ge_<threshold>_edges.rds`, not the archived `*_GD_TWAS_overlap_graph.rds` files.",
   "",
-  "Default manuscript behavior is unchanged when no new flags are supplied: expression-network mode defaults to TRUE and `Initial_weight_mode auto` resolves to `m2_expression_weighted` for co-expression networks."
+  "Default manuscript behavior is unchanged when no new flags are supplied: expression-network mode defaults to TRUE and `Initial_weight_mode auto` resolves to `nesta_expression_weighted` for co-expression networks."
 ), file.path(reports, "NESTA_STRING_FULL_NETWORK_CODE_AUDIT.md"))
 
 writeLines(c(
@@ -71,7 +71,7 @@ writeLines(c(
   "",
   "## 3. Zero-imputation implementation",
   "",
-  "For every node in a loaded diffusion graph, the pipeline creates a full-length initial vector. Matched TWAS genes receive their collapsed TWAS statistic; all other graph nodes receive 0. In M2 mode, expression weighting is applied after a left join, so nodes missing expression metadata are retained with zero contribution.",
+  "For every node in a loaded diffusion graph, the pipeline creates a full-length initial vector. Matched TWAS genes receive their collapsed TWAS statistic; all other graph nodes receive 0. In NESTA mode, expression weighting is applied after a left join, so nodes missing expression metadata are retained with zero contribution.",
   "",
   "## 4. STRING download/build details",
   "",

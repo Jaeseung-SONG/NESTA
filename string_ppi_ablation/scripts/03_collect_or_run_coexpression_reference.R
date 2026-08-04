@@ -38,7 +38,7 @@ if (length(files)) {
       "--out_dir", paste0(out, "/"),
       "--prefix", prefix,
       "--Analysis_name", cell,
-      "--Initial_weight_mode", "m2_expression_weighted"
+      "--Initial_weight_mode", "nesta_expression_weighted"
     )
     log <- file.path(out, paste0(safe_slug(cell), ".coexpression_reference.log"))
     rc <- system2("Rscript", cmd, stdout = log, stderr = log)

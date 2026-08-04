@@ -29,18 +29,18 @@ coex_row <- get_string_row("string_coex_comparable")
 cond <- data.table(
   method_id = c("coexpression_reference_mc",
                 "string_default_twas_only",
-                "string_default_m2_expression_weighted",
+                "string_default_nesta_expression_weighted",
                 "string_coex_comparable_twas_only",
-                "string_coex_comparable_m2_expression_weighted"),
+                "string_coex_comparable_nesta_expression_weighted"),
   network_type = c("thyroid_cell_type_coexpression", rep("STRING_PPI", 4)),
-  initial_weight_mode = c("m2_expression_weighted", "twas_only", "m2_expression_weighted", "twas_only", "m2_expression_weighted"),
+  initial_weight_mode = c("nesta_expression_weighted", "twas_only", "nesta_expression_weighted", "twas_only", "nesta_expression_weighted"),
   threshold_mode = c("not_applicable", "string_default", "string_default", "string_coex_comparable", "string_coex_comparable"),
   threshold_value = c(NA_real_, default_row$threshold, default_row$threshold, coex_row$threshold, coex_row$threshold),
   score_dir = c(file.path(root, "nesta_coexpression_reference"),
                 file.path(root, "nesta_string/string_default_twas_only"),
-                file.path(root, "nesta_string/string_default_m2_expression_weighted"),
+                file.path(root, "nesta_string/string_default_nesta_expression_weighted"),
                 file.path(root, "nesta_string/string_coex_comparable_twas_only"),
-                file.path(root, "nesta_string/string_coex_comparable_m2_expression_weighted"))
+                file.path(root, "nesta_string/string_coex_comparable_nesta_expression_weighted"))
 )
 fwrite(cond, file.path(tables, "string_ppi_2x2_condition_manifest_for_evaluation.tsv"), sep = "\t")
 
