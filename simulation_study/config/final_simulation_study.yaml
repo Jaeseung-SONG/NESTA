@@ -1,0 +1,21 @@
+study_name: NESTA final simulation study
+binding_submitted_nesta: /home/js/NESTA/Analysis/Nesta.R
+data_dir: /home/js/NESTA/simulation_study_data
+local_results_dir: /home/js/NESTA/simulation_study_results
+dropbox_results_root: /home/js_subdir/Dropbox/NESTA_revision
+reference_root: /home/js_subdir/Dropbox/NESTA_revision
+scenarios:
+  decision_rule_repair:
+    reference_dir: /home/js_subdir/Dropbox/NESTA_revision/NESTA_simulation_080726_1803
+    classification: decision_rule_repair_passed_confirmatory_ready
+  comparator_framed_confirmatory:
+    reference_dir: /home/js_subdir/Dropbox/NESTA_revision/NESTA_simulation_080726_1951
+    classification: confirmatory_success_with_strong_unsigned_ppr_rwr
+  strict_top_fraction_audit:
+    reference_dir: /home/js_subdir/Dropbox/NESTA_revision/NESTA_simulation_090726_0045
+    classification: strict_fraction_audit_reveals_top100_leniency
+  false_positive_control_audit:
+    reference_dir: /home/js_subdir/Dropbox/NESTA_revision/NESTA_simulation_090726_0135
+    classification: false_positive_audit_completed_ppr_rwr_remain_strong_unsigned
+tolerance:
+  recall_precision_fdr_fpr_abs: 0.02

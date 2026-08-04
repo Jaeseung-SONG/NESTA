@@ -1,0 +1,13 @@
+#!/usr/bin/env Rscript
+source(file.path(dirname(normalizePath(sub("^--file=", "", commandArgs(FALSE)[grep("^--file=", commandArgs(FALSE))][1]))), "lib_config.R"))
+args <- commandArgs(trailingOnly = TRUE)
+if (length(args) != 1) stop("Usage: 00_check_inputs.R <config.yaml>")
+cfg <- read_simple_config(args[1])
+required_files <- c("nesta_script", "string_utils", "gd_twas", "result2_known_marker_rdata")
+required_dirs <- c("coexpression_network_dir", "coexpression_reference_score_dir")
+missing <- character()
+for (k in required_files) if (!file.exists(cfg_get(cfg, k))) missing <- c(missing, paste(k, cfg_get(cfg, k), sep=": "))
+for (k in required_dirs) if (!dir.exists(cfg_get(cfg, k))) missing <- c(missing, paste(k, cfg_get(cfg, k), sep=": "))
+if (length(missing)) stop("Missing inputs:\n", paste(missing, collapse="\n"))
+ensure_output_tree(cfg_get(cfg, "output_dir"))
+cat("All required configured inputs are present.\n")

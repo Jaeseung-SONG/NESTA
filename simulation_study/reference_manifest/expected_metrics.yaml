@@ -1,0 +1,29 @@
+metric_tolerance: 0.02
+expected:
+  decision_rule_repair:
+    F_top100: 0.7913
+    F_top150: 0.9975
+    F_top200: 1.0000
+    H_pass: true
+  comparator_framed_confirmatory:
+    classification: confirmatory_success_with_strong_unsigned_ppr_rwr
+    F_top100: 0.7795
+    F_top150: 0.9988
+    F_top200: 1.0000
+  strict_top_fraction_audit:
+    classification: strict_fraction_audit_reveals_top100_leniency
+    PPR_top1: 0.0835
+    PPR_top5: 0.6766
+    RWR_top1: 0.0221
+    RWR_top5: 0.3661
+    NESTA_desc_risk_top50: 0.7963
+    NESTA_asc_prot_top50: 0.7628
+  false_positive_control_audit:
+    classification: false_positive_audit_completed_ppr_rwr_remain_strong_unsigned
+    NESTA_top50_recall: 0.1255
+    NESTA_top50_precision: 0.1004
+    NESTA_top50_FDR: 0.8996
+    NESTA_top50_FPR: 0.0473
+    PPR_recall: 0.6766
+    PPR_precision: 0.5413
+    PPR_FDR: 0.4587

@@ -1,0 +1,31 @@
+phenotype_id: 46_irnt
+phenotype_label: Hand grip strength, left
+
+neale_sumstats: /home/js/Thyroid_disorder/46_irnt.gwas.imputed_v3.both_sexes.tsv.bgz
+neale_download_url: https://broad-ukb-sumstats-us-east-1.s3.amazonaws.com/round2/additive-tsvs/46_irnt.gwas.imputed_v3.both_sexes.tsv.bgz
+rsid_map: /home/js/Thyroid_disorder/ukb_snp_qc/variant_rsid_map.tsv.gz
+
+ldsc_conda_env: /home/js/anaconda3/envs/ldsc
+ldsc_munge_script: /home/js/ldsc/munge_sumstats.py
+
+fusion_assoc_script: /home/js/fusion_twas-master/FUSION.assoc_test.R
+fusion_weights_pos: /shared_data/TWAS/FUSION_Weights/GTEx_v8/EUR/GTExv8.EUR.Thyroid.pos
+fusion_weights_dir: /shared_data/TWAS/FUSION_Weights/GTEx_v8/EUR
+fusion_ref_ld_chr: /home/js/fusion_twas-master/LDREF/1000G.EUR.
+
+nesta_script: /home/js/NESTA/Analysis/Nesta.R
+thyroid_network_dir: /home/js/Thyroid_disorder/Coex_Net_Thyr
+
+gd_twas: /home/js/Thyroid_disorder/TWAS_res/Graves_res.rds
+result2_known_marker_rdata: /home/js/Thyroid_disorder/Sig_gene_per_method/Dat_with_significance.Rdata
+
+gd_gwas_n: 456348
+negative_control_gwas_n: 359704
+rhoge_gw_p: 0.05
+rhoge_bd_p1: 0.05
+rhoge_bd_p2: 0.05
+rhoge_min_regions: 10
+rhoge_seed: 20260729
+
+output_dir: /home/js/Thyroid_disorder/revision_zenodo_upload/negative_control_GWAS
+r_libs_user: /home/js_subdir/R/x86_64-pc-linux-gnu-library/4.1

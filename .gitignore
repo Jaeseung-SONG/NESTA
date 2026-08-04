@@ -1,0 +1,74 @@
+# Local agent/editor metadata
+.agents/
+.codex/
+
+# Generated outputs and result trees
+outputs/*
+results/
+*_results/
+*_data/
+intermediate_replicates/
+generated_expression/
+generated_networks/
+per_gene_scores/
+simulation/generated_expression/
+simulation/generated_networks/
+simulation/intermediate_replicates/
+simulation/results/
+simulation_refined/
+simulation_post_pilot/
+simulation_study_data/
+simulation_study_results/
+simulation_study_archive/
+NESTA_negative_control_screen_*/
+negative_control_outputs/
+negative_control_results/
+
+# Keep the curated empty-output placeholder.
+!simulation_study/outputs/
+!simulation_study/outputs/README_KEEP_EMPTY.md
+
+# Large local inputs, downloads, and archives
+ukbb_neale_inputs/
+string_download/
+archive/
+archives/
+*_archive/
+*_archives/
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.gz
+*.bgz
+*.bz2
+*.xz
+
+# Raw downloaded STRING files and generated STRING graph artifacts
+protein.links*.txt.gz
+protein.info*.txt.gz
+STRING_human_*_edges.rds
+string_ppi_all_threshold_full_network_summary.tsv
+string_download_manifest.tsv
+
+# Generated binary R outputs in result/output directories.
+**/outputs/**/*.rds
+**/outputs/**/*.RData
+**/outputs/**/*.Rdata
+**/results/**/*.rds
+**/results/**/*.RData
+**/results/**/*.Rdata
+**/*_results/**/*.rds
+**/*_results/**/*.RData
+**/*_results/**/*.Rdata
+**/*_data/**/*.rds
+**/*_data/**/*.RData
+**/*_data/**/*.Rdata
+
+# Runtime logs and temporary files
+*.log
+*.tmp
+*.bak
+.Rhistory
+.RData
+.Ruserdata

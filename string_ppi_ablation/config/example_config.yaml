@@ -1,0 +1,16 @@
+output_dir: /home/js/Thyroid_disorder/revision_zenodo_upload/string_ppi_ablation_full_network
+nesta_script: /home/js/NESTA/Analysis/Nesta.R
+string_utils: /home/js/NESTA/Analysis/string_ppi_utils.R
+gd_twas: /home/js/Thyroid_disorder/TWAS_res/Graves_res.rds
+coexpression_network_dir: /home/js/Thyroid_disorder/Coex_Net_Thyr
+coexpression_reference_score_dir: /home/js/Thyroid_disorder/Grid_test_0715
+result2_known_marker_rdata: /home/js/Thyroid_disorder/Sig_gene_per_method/Dat_with_significance.Rdata
+r_libs: /home/js/R/x86_64-pc-linux-gnu-library/4.1:/home/js_subdir/R/x86_64-pc-linux-gnu-library/4.1
+string_version: 12.0
+string_taxon_id: 9606
+string_default_threshold: 700
+string_candidate_thresholds: 400,500,600,700,800,900
+coexpression_edge_cutoff: 0.1
+diffuse_method: mc
+diffuse_nperm: 300
+max_parallel_jobs: 1
