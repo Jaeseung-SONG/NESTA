@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="720" viewBox="0 0 1600 720" role="img" aria-labelledby="title desc">
+  <title id="title">NESTA framework overview</title>
+  <desc id="desc">Independent TWAS evidence and single-cell-derived cell type-specific co-expression networks converge in signed network diffusion to produce cell type-specific gene re-prioritization.</desc>
+  <defs>
+    <linearGradient id="signed" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2563A6"/>
+      <stop offset="0.5" stop-color="#F2F4F6"/>
+      <stop offset="1" stop-color="#D94A4A"/>
+    </linearGradient>
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#223247" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#46647F"/>
+    </marker>
+    <style>
+      .title { font: 700 43px Arial, Helvetica, sans-serif; fill: #172A3A; }
+      .subtitle { font: 400 20px Arial, Helvetica, sans-serif; fill: #53687A; }
+      .heading { font: 700 25px Arial, Helvetica, sans-serif; fill: #172A3A; }
+      .body { font: 400 16px Arial, Helvetica, sans-serif; fill: #53687A; }
+      .small { font: 400 13px Arial, Helvetica, sans-serif; fill: #667B8D; }
+      .gene { font: 700 13px Arial, Helvetica, sans-serif; fill: #263A4A; }
+      .whiteGene { font: 700 13px Arial, Helvetica, sans-serif; fill: #FFFFFF; }
+      .card { fill: #FFFFFF; stroke: #D8E1E8; stroke-width: 1.5; }
+      .edge { stroke: #A5B5C2; stroke-width: 2; opacity: 0.86; }
+      .node { stroke: #FFFFFF; stroke-width: 2.5; }
+      .flow { fill: none; stroke: #46647F; stroke-width: 3.2; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1600" height="720" fill="#F8FAFC"/>
+  <text x="800" y="58" text-anchor="middle" class="title">NESTA</text>
+  <text x="800" y="92" text-anchor="middle" class="subtitle">Network-wise Expansion for Single-cell-Type-specific Association</text>
+
+  <!-- Independent branches and convergence -->
+  <path class="flow" d="M370 505 H434"/>
+  <path class="flow" d="M776 367 H794"/>
+  <path class="flow" d="M1200 365 H1222"/>
+  <circle cx="750" cy="367" r="25" fill="#EEF3F6" stroke="#C8D5DE" stroke-width="1.5"/>
+  <path d="M739 367 H761 M750 356 V378" stroke="#46647F" stroke-width="3.4" stroke-linecap="round"/>
+  <path class="flow" d="M370 235 H690 C730 235 750 290 750 342"/>
+  <path class="flow" d="M740 505 C748 480 750 435 750 392"/>
+
+  <!-- Branch 1: TWAS -->
+  <g filter="url(#shadow)"><rect class="card" x="60" y="145" width="310" height="180" rx="20"/></g>
+  <text x="86" y="187" class="heading">TWAS results</text>
+  <text x="86" y="214" class="body">Gene-level genetic association signals</text>
+  <line x1="92" y1="290" x2="338" y2="290" stroke="#9FB0BD" stroke-width="1.4"/>
+  <line x1="92" y1="238" x2="92" y2="290" stroke="#9FB0BD" stroke-width="1.4"/>
+  <line x1="92" y1="252" x2="338" y2="252" stroke="#D8E0E6" stroke-width="1" stroke-dasharray="4 4"/>
+  <g fill="#376FA4">
+    <circle cx="99" cy="280" r="2.7"/><circle cx="105" cy="272" r="2.7"/><circle cx="112" cy="285" r="2.7"/><circle cx="119" cy="264" r="2.7"/><circle cx="126" cy="276" r="2.7"/>
+    <circle cx="159" cy="284" r="2.7"/><circle cx="166" cy="270" r="2.7"/><circle cx="173" cy="279" r="2.7"/><circle cx="180" cy="258" r="2.7"/><circle cx="187" cy="275" r="2.7"/>
+    <circle cx="220" cy="281" r="2.7"/><circle cx="227" cy="267" r="2.7"/><circle cx="234" cy="286" r="2.7"/><circle cx="241" cy="273" r="2.7"/><circle cx="248" cy="263" r="2.7"/>
+    <circle cx="282" cy="277" r="2.7"/><circle cx="289" cy="269" r="2.7"/><circle cx="296" cy="284" r="2.7"/><circle cx="303" cy="260" r="2.7"/><circle cx="310" cy="274" r="2.7"/>
+  </g>
+  <g fill="#D45155">
+    <circle cx="133" cy="266" r="2.7"/><circle cx="140" cy="245" r="3.2"/><circle cx="147" cy="278" r="2.7"/>
+    <circle cx="194" cy="268" r="2.7"/><circle cx="201" cy="232" r="4"/><circle cx="208" cy="277" r="2.7"/>
+    <circle cx="255" cy="280" r="2.7"/><circle cx="262" cy="247" r="3.2"/><circle cx="269" cy="271" r="2.7"/>
+    <circle cx="317" cy="281" r="2.7"/><circle cx="324" cy="239" r="3.7"/><circle cx="332" cy="269" r="2.7"/>
+  </g>
+  <text x="114" y="309" text-anchor="middle" class="small">1</text><text x="176" y="309" text-anchor="middle" class="small">2</text>
+  <text x="238" y="309" text-anchor="middle" class="small">3</text><text x="300" y="309" text-anchor="middle" class="small">4</text>
+
+  <!-- Branch 2a: single-cell -->
+  <g filter="url(#shadow)"><rect class="card" x="60" y="415" width="310" height="180" rx="20"/></g>
+  <text x="86" y="457" class="heading">Single-cell data</text>
+  <text x="86" y="484" class="body">Disease-relevant tissue and cell types</text>
+  <circle cx="138" cy="554" r="29" fill="#E97865" opacity="0.20"/><circle cx="138" cy="554" r="15" fill="#E97865" opacity="0.78"/>
+  <circle cx="217" cy="545" r="31" fill="#4A87B8" opacity="0.20"/><circle cx="217" cy="545" r="16" fill="#4A87B8" opacity="0.80"/>
+  <circle cx="294" cy="557" r="28" fill="#57A77A" opacity="0.20"/><circle cx="294" cy="557" r="15" fill="#57A77A" opacity="0.82"/>
+  <text x="138" y="559" text-anchor="middle" class="gene">A</text><text x="217" y="550" text-anchor="middle" class="gene">B</text><text x="294" y="562" text-anchor="middle" class="gene">C</text>
+
+  <!-- Branch 2b: co-expression network -->
+  <g filter="url(#shadow)"><rect class="card" x="440" y="415" width="300" height="180" rx="20"/></g>
+  <text x="456" y="457" class="heading">Co-expression network</text>
+  <text x="466" y="484" class="body">One gene network for each cell type</text>
+  <g>
+    <line class="edge" x1="494" y1="558" x2="535" y2="530"/><line class="edge" x1="494" y1="558" x2="544" y2="579"/>
+    <line class="edge" x1="535" y1="530" x2="589" y2="551"/><line class="edge" x1="535" y1="530" x2="627" y2="522"/>
+    <line class="edge" x1="544" y1="579" x2="589" y2="551"/><line class="edge" x1="544" y1="579" x2="638" y2="578"/>
+    <line class="edge" x1="589" y1="551" x2="627" y2="522"/><line class="edge" x1="589" y1="551" x2="681" y2="550"/>
+    <line class="edge" x1="627" y1="522" x2="681" y2="550"/><line class="edge" x1="638" y1="578" x2="681" y2="550"/>
+    <circle class="node" cx="494" cy="558" r="9" fill="#7892A4"/><circle class="node" cx="535" cy="530" r="9" fill="#7892A4"/>
+    <circle class="node" cx="544" cy="579" r="9" fill="#7892A4"/><circle class="node" cx="589" cy="551" r="11" fill="#527C98"/>
+    <circle class="node" cx="627" cy="522" r="9" fill="#7892A4"/><circle class="node" cx="638" cy="578" r="9" fill="#7892A4"/>
+    <circle class="node" cx="681" cy="550" r="10" fill="#527C98"/>
+  </g>
+
+  <!-- NESTA convergence and signed diffusion -->
+  <g filter="url(#shadow)"><rect class="card" x="800" y="105" width="400" height="510" rx="22"/></g>
+  <text x="816" y="150" class="heading">Signed network diffusion</text>
+  <text x="816" y="179" class="body">Genetically regulated gene expression signals</text>
+  <text x="816" y="201" class="body">spread through cell type-specific networks</text>
+
+  <!-- the same network is used for all three signed views -->
+  <rect x="816" y="222" width="174" height="160" rx="14" fill="#FCF2F1" stroke="#F0D0CC"/>
+  <text x="833" y="248" class="gene" fill="#B83D43">Positive diffusion</text>
+  <g>
+    <line class="edge" x1="847" y1="310" x2="880" y2="275"/><line class="edge" x1="847" y1="310" x2="882" y2="348"/><line class="edge" x1="880" y1="275" x2="917" y2="312"/><line class="edge" x1="882" y1="348" x2="917" y2="312"/><line class="edge" x1="917" y1="312" x2="958" y2="281"/><line class="edge" x1="917" y1="312" x2="958" y2="348"/><line class="edge" x1="958" y1="281" x2="958" y2="348"/>
+    <circle class="node" cx="847" cy="310" r="11" fill="#C83E4B"/><circle class="node" cx="880" cy="275" r="9" fill="#E9A69D"/><circle class="node" cx="882" cy="348" r="10" fill="#DE756C"/><circle class="node" cx="917" cy="312" r="9" fill="#DB8980"/><circle class="node" cx="958" cy="281" r="12" fill="#D84A50"/><circle class="node" cx="958" cy="348" r="9" fill="#EAB0A9"/>
+  </g>
+
+  <rect x="1010" y="222" width="174" height="160" rx="14" fill="#EFF5FA" stroke="#CADCEB"/>
+  <text x="1027" y="248" class="gene" fill="#245F99">Negative diffusion</text>
+  <g>
+    <line class="edge" x1="1041" y1="310" x2="1074" y2="275"/><line class="edge" x1="1041" y1="310" x2="1076" y2="348"/><line class="edge" x1="1074" y1="275" x2="1111" y2="312"/><line class="edge" x1="1076" y1="348" x2="1111" y2="312"/><line class="edge" x1="1111" y1="312" x2="1152" y2="281"/><line class="edge" x1="1111" y1="312" x2="1152" y2="348"/><line class="edge" x1="1152" y1="281" x2="1152" y2="348"/>
+    <circle class="node" cx="1041" cy="310" r="8" fill="#A9BED1"/><circle class="node" cx="1074" cy="275" r="12" fill="#2D68A1"/><circle class="node" cx="1076" cy="348" r="10" fill="#6E93B7"/><circle class="node" cx="1111" cy="312" r="9" fill="#789BBA"/><circle class="node" cx="1152" cy="281" r="8" fill="#AAC0D2"/><circle class="node" cx="1152" cy="348" r="12" fill="#326DA5"/>
+  </g>
+
+  <rect x="850" y="423" width="300" height="164" rx="15" fill="#F4F5F6" stroke="#D4DCE2"/>
+  <path d="M903 394 C903 408 930 413 963 416" fill="none" stroke="#7E909F" stroke-width="2.2" marker-end="url(#arrow)"/>
+  <path d="M1097 394 C1097 408 1070 413 1037 416" fill="none" stroke="#7E909F" stroke-width="2.2" marker-end="url(#arrow)"/>
+  <text x="868" y="450" class="gene">Integrated landscape</text>
+  <g>
+    <line class="edge" x1="889" y1="515" x2="934" y2="478"/><line class="edge" x1="889" y1="515" x2="936" y2="558"/><line class="edge" x1="934" y1="478" x2="995" y2="518"/><line class="edge" x1="936" y1="558" x2="995" y2="518"/><line class="edge" x1="995" y1="518" x2="1065" y2="480"/><line class="edge" x1="995" y1="518" x2="1065" y2="558"/><line class="edge" x1="1065" y1="480" x2="1065" y2="558"/>
+    <!-- red dominates -->
+    <circle class="node" cx="889" cy="515" r="14" fill="#C83E4B"/>
+    <!-- blue dominates -->
+    <circle class="node" cx="934" cy="478" r="15" fill="#2D68A1"/>
+    <!-- similar positive and negative signals -->
+    <circle class="node" cx="936" cy="558" r="13" fill="#A9B1B8"/>
+    <circle class="node" cx="995" cy="518" r="13" fill="#B4BAC0"/>
+    <!-- red dominates -->
+    <circle class="node" cx="1065" cy="480" r="15" fill="#D4484E"/>
+    <!-- blue dominates -->
+    <circle class="node" cx="1065" cy="558" r="15" fill="#326DA5"/>
+  </g>
+
+  <!-- Cell type-specific output -->
+  <g filter="url(#shadow)"><rect class="card" x="1230" y="175" width="330" height="380" rx="22"/></g>
+  <text x="1256" y="224" class="heading">Cell type-specific</text>
+  <text x="1256" y="253" class="heading">gene re-prioritization</text>
+  <text x="1256" y="283" class="body">Distinct ranked profiles across cell types</text>
+
+  <circle cx="1252" cy="327" r="15" fill="#E97865"/><text x="1252" y="332" text-anchor="middle" class="gene">A</text>
+  <text x="1278" y="332" class="gene">Cell type A</text>
+  <rect x="1360" y="312" width="170" height="14" fill="#EFF2F4"/><rect x="1360" y="312" width="148" height="14" fill="#D95B58"/>
+  <rect x="1360" y="332" width="170" height="14" fill="#EFF2F4"/><rect x="1360" y="332" width="105" height="14" fill="#E3937F"/>
+  <rect x="1360" y="352" width="170" height="14" fill="#EFF2F4"/><rect x="1360" y="352" width="61" height="14" fill="#7B9BBB"/>
+
+  <circle cx="1252" cy="405" r="15" fill="#4A87B8"/><text x="1252" y="410" text-anchor="middle" class="gene">B</text>
+  <text x="1278" y="410" class="gene">Cell type B</text>
+  <rect x="1360" y="390" width="170" height="14" fill="#EFF2F4"/><rect x="1360" y="390" width="129" height="14" fill="#5E88B0"/>
+  <rect x="1360" y="410" width="170" height="14" fill="#EFF2F4"/><rect x="1360" y="410" width="92" height="14" fill="#D9776D"/>
+  <rect x="1360" y="430" width="170" height="14" fill="#EFF2F4"/><rect x="1360" y="430" width="45" height="14" fill="#91A9BF"/>
+
+  <circle cx="1252" cy="483" r="15" fill="#57A77A"/><text x="1252" y="488" text-anchor="middle" class="gene">C</text>
+  <text x="1278" y="488" class="gene">Cell type C</text>
+  <rect x="1360" y="468" width="170" height="14" fill="#EFF2F4"/><rect x="1360" y="468" width="156" height="14" fill="#D35356"/>
+  <rect x="1360" y="488" width="170" height="14" fill="#EFF2F4"/><rect x="1360" y="488" width="118" height="14" fill="#7295B6"/>
+  <rect x="1360" y="508" width="170" height="14" fill="#EFF2F4"/><rect x="1360" y="508" width="70" height="14" fill="#E39782"/>
+</svg>
