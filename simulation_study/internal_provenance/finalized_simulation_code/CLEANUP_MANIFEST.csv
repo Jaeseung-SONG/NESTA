@@ -1,0 +1,7 @@
+relative_path,action,reason,size_bytes,export_status,kind
+results,deleted,obsolete disposable resettable-workspace output from prior audit run,644,previous Dropbox reports preserved,directory
+RUN_STATUS.md,deleted,obsolete disposable resettable-workspace output from prior audit run,256,previous Dropbox reports preserved,file
+logs,absent,no cleanup needed,0,not_applicable,missing
+R,retained,source/config required for false-positive audit rerun,0,not_applicable,directory
+scripts,retained,source/config required for false-positive audit rerun,0,not_applicable,directory
+config,retained,source/config required for false-positive audit rerun,0,not_applicable,directory

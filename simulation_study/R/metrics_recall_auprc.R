@@ -1,3 +1,2 @@
-# Modular placeholder for the compact package.
-# Final accepted scenario implementations are preserved in reference_provenance/final_R/.
-# The reproducibility package verifies manuscript-relevant outputs against locked references.
+# Public reviewer-facing recall summaries are produced by the delta threshold workflow.
+# AUPRC is retained only as a secondary score-ranking diagnostic where straightforward.

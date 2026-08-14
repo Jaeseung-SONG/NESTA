@@ -1,0 +1,227 @@
+binding_plan: /home/js_subdir/Dropbox/NESTA_revision/STUDY_PLAN_0705_OBSERVED_METRIC_ADAPTIVE_CALIBRATION.md
+binding_plan_sha256: e3b364fd8fbbb8dfa48dfac2875ae72b27ffcbfc239ac8600b1590b6b69f71eb
+workspace: /home/js/NESTA/simulation
+report_root: /home/js_subdir/Dropbox/NESTA_revision
+submitted_nesta: /home/js/NESTA/Analysis/Nesta.R
+tom_source_dir: /home/js/Thyroid_disorder/TOM
+coexpression_object_dir: /home/js/Thyroid_disorder/Coex_Net_Thyr_unsigned
+edge_cutoff: 0.1
+twas_cutoff_primary: 1.0
+diffusion_method_primary: ber_p
+diffustats_permutation_argument: n.perm
+diffustats_permutations: 300
+pilot_replicates_per_difficulty_setting: 40
+pilot_total_replicates: 80
+confirmatory_replicates_per_difficulty_setting: 200
+confirmatory_total_replicates: 400
+pilot_weight_permutations_per_replicate: 10
+template_subset_seed: 2026061701
+pilot_topology_seed_base: 2027052012
+pilot_null_seed_base: 2027053012
+confirmatory_topology_seed_base: 2027054012
+confirmatory_null_seed_base: 2027055012
+primary_score: abs_final_NESTA_heat
+primary_score_label: NESTA_final_heat
+primary_target_set: A2_intermediate_degree_capped
+auxiliary_interpretation_metric: delta_NESTA
+diagnostic_sensitivity_score: old_heat_delta_composite
+benchmark_unsigned_personalization: -log10_TWAS.P_sum_normalized
+benchmark_signed_personalization: positive_and_negative_two_channel_-log10_TWAS.P
+rwr_restart_primary: 0.50
+rwr_restart_sensitivity: [0.30, 0.70]
+ppr_damping_primary: 0.85
+ppr_damping_sensitivity: [0.75, 0.95]
+difficulty_settings:
+  extreme_sparse:
+    total_genes: 1000
+    a1_seed_count: 7
+    a2_primary_targets: 28
+    relay_genes: 22
+    a2_observed_z_mean_abs: 0.10
+    two_hop_fraction_min: 0.50
+    final_heat_top100_fold_enrichment_min: 2.5
+    final_heat_fold_improvement_over_raw_twas_min: 3.0
+  rare_target_detection:
+    total_genes: 1000
+    a1_seed_count: 10
+    a2_primary_targets: 40
+    relay_genes: 28
+    a2_observed_z_mean_abs: 0.15
+    two_hop_fraction_min: 0.55
+    two_hop_fraction_max: 0.80
+    final_heat_top100_fold_enrichment_min: 1.5
+    final_heat_top100_recall_min: 0.12
+    final_heat_top100_recall_preferred: 0.135
+    final_heat_top150_recall_min: 0.18
+    final_heat_top200_recall_min: 0.25
+    final_heat_top200_recall_preferred: 0.28
+    final_heat_raw_auprc_min: not_binding
+    final_heat_fold_improvement_over_raw_twas_min: greater_than_1
+    final_heat_fold_improvement_over_m2_no_diffusion_min: greater_than_1
+    final_heat_top100_difference_over_raw_twas_min: 0.06
+    final_heat_top100_difference_over_m2_no_diffusion_min: 0.03
+    final_heat_top100_difference_over_i2_i3: secondary_network_specific_sensitivity
+    final_heat_top100_difference_over_weight_permutation_min: 0.02
+    final_heat_top100_to_top200_compression_min: 0.145
+    relay_gene_top100_rate_max: 0.140
+    relay_gene_top50_rate_max: 0.070
+    relay_to_A2_top100_ratio_max: 0.50
+    relay_to_A2_heat_ratio_hard_max: 0.95
+    relay_to_A2_heat_ratio_preferred_max: 0.90
+    final_heat_sign_concordant_top100_recall_min: 0.100
+    opposite_sign_decoy_top100_rate_max: 0.15
+    score_degree_spearman_abs_max: 0.15
+    high_degree_decoy_top100_rate_max: 0.12
+  conventional_module_recovery: excluded_nonbinding_this_round
+path_qc:
+  direct_1hop_fraction_max: 0.60
+  rare_direct_1hop_fraction_max: 0.30
+  rare_direct_1hop_fraction_min: 0.15
+  rare_median_a1_a2_path_min: 1.7
+  rare_median_a1_a2_path_max: 2.4
+  rare_a2_same_component_fraction_min: 0.90
+  extreme_direct_1hop_fraction_min: 0.15
+  extreme_direct_1hop_fraction_max: 0.30
+  extreme_median_a1_a2_path_min: 1.7
+  extreme_median_a1_a2_path_max: 2.8
+  extreme_a2_same_component_fraction_min: 0.85
+  three_plus_hop_fraction_max_rare: 0.15
+  three_plus_hop_fraction_max_extreme: 0.20
+branch_conductance_qc:
+  A_branch_background_cut_fraction_legacy_max: 0.35
+  A_branch_internal_edge_fraction_min: 0.50
+  A_branch_background_cut_fraction_preferred_max: 0.10
+  A_branch_background_cut_fraction_hard_max: 0.12
+  seed_neighborhood_background_fraction_max: 0.01
+  high_degree_bridge_count_max: 0.15
+  opposite_sign_bridge_count_preferred_max: 0.05
+  opposite_sign_bridge_count_hard_max: 0.20
+relay_structure_qc:
+  rare_relay_gene_count_preferred_range: [20, 40]
+  rare_relay_gene_count_pilot_eligible_min: 15
+  relay_raw_TWAS_top100_fraction_max: 0.10
+  relay_M2_initial_top100_fraction_preferred_max: 0.03
+  relay_M2_initial_top100_fraction_hard_max: 0.05
+  relay_gene_top100_rate_max: 0.140
+  relay_gene_top50_rate_max: 0.070
+  relay_to_A2_top100_ratio_max: 0.50
+  relay_background_mean_TOM_max: 0.01
+  relay_high_degree_decoy_TOM_max: 0.01
+  rare_fraction_A2_with_relay_path_min: 0.85
+topology_gate_realignment:
+  relevant_hard_global_pass_fraction_min: 0.95
+  rare_relevant_module_local_pass_fraction_min: 0.50
+  i2_i3_matching_disruption_pass_fraction_min: 0.85
+  control_module_local_failure_nonblocking: true
+diffusion_retention_pilot_targets:
+  fraction_seed_heat_retained_in_A_branch_preferred_min: 0.10
+  fraction_seed_heat_reaching_A2_minimum_min: 0.025
+  fraction_seed_heat_leaking_to_background_hard_max: 0.80
+  fraction_seed_heat_leaking_to_background_preferred_max: 0.78
+  fraction_seed_heat_leaking_to_high_degree_decoys_max: 0.08
+  fraction_seed_heat_leaking_to_opposite_sign_decoys_max: 0.10
+  A2_final_heat_rank_compression_min: 0.145
+degree_qc:
+  low_degree_target_fraction: warning_only
+  mid_degree_target_fraction: warning_only
+  high_degree_target_fraction: warning_only
+  extreme_high_degree_fraction_max: 0.25
+  extreme_high_degree_A2_count_cap_extreme_and_rare: ceil_0.25_n_A2_primary
+  rare_target_count_preferred: [30, 45]
+  rare_target_count_pilot_eligible_min: 24
+  rare_target_count_absolute_min_warning_allowed: 20
+  median_A2_degree_percentile: warning_only_preferred_20_to_75
+topology_qc:
+  density_min: 0.0008
+  density_max: 0.22
+  largest_connected_component_fraction_min: 0.04
+  module_a_connected_component_fraction_min: 0.75
+  isolated_fraction_max: 0.97
+  within_between_a_ratio_min: 1.40
+  module_a_clustering_reference: background_40th_percentile
+  density_difference_max_i2_i3: 0.025
+  strength_ratio_min_i2_i3: 0.45
+  strength_ratio_max_i2_i3: 2.20
+  expression_ks_max_i2_i3: 0.22
+  i2_i3_pass_fraction_min: 0.85
+target_initial_signal_qc:
+  rare_fraction_A2_in_M2_initial_top100_preferred: 0.05
+  rare_fraction_A2_in_M2_initial_top100_max: 0.10
+  rare_fraction_A2_in_raw_TWAS_top100_max: 0.10
+  rare_fraction_A2_in_M2_initial_top200_preferred: 0.25
+  rare_fraction_A2_in_M2_initial_top200_warning: 0.35
+  extreme_fraction_A2_in_M2_initial_top100_max: 0.10
+  extreme_fraction_A2_in_raw_TWAS_top100_max: 0.10
+  top200_leakage: warning_not_primary_performance_metric
+branch_specificity_qc:
+  within_to_between_TOM_ratio_min: 2.00
+  within_to_background_TOM_ratio_min: 10.00
+  fraction_A2_with_single_dominant_branch_min: 0.80
+control_disruption_qc:
+  tom_reduction_min_or_path_increase: [0.80, 1.0]
+  signed_branch_preservation: diagnostic_only
+
+sweet_spot_calibration_qc:
+  A1_relay_mean_TOM_preferred: [0.275, 0.290]
+  relay_A2_mean_TOM_hard: [0.175, 0.200]
+  relay_A2_mean_TOM_preferred: [0.175, 0.200]
+  median_A1_relay_A2_path_strength_hard: [0.72, 0.85]
+  median_A1_relay_A2_path_strength_preferred: [0.76, 0.83]
+  relay_count_preferred: [27, 30]
+  relay_count_hard_min: 26
+  target_1607_relay_A2_TOM: 0.182
+  target_1607_A1_relay_TOM: 0.281
+  target_1607_path_strength: 0.804
+  calibration_uses_final_heat_metrics: false
+
+qc_gate_realignment:
+  rare_relevant_module_local_pass_fraction_minimum_pilot_eligible: 0.50
+  rare_relevant_module_local_pass_fraction_preferred: 0.65
+  degree_hard_gate_pass_fraction_min: 0.95
+  rare_target_count_pilot_eligible_fraction_min: 0.90
+  mean_fraction_extreme_high_degree_A2_max: 0.15
+  mean_median_A2_degree_percentile_max: 70
+  individual_fraction_extreme_high_degree_A2_max: 0.40
+  sparse_degree_outlier_fraction_warning_only_max: 0.05
+  m2_initial_top200_warning_only: true
+
+opposite_sign_bridge_suppression:
+  suppress_cross_branch_edges_only: true
+  preserve_within_branch_coherence: true
+  opposite_sign_bridge_count_preferred_max: 0.15
+  opposite_sign_bridge_count_hard_max: 0.20
+
+bounded_conductance_calibration:
+  structural_only: true
+  candidate_A1_relay_centers: [0.275, 0.282, 0.290]
+  candidate_relay_A2_centers: [0.180, 0.185, 0.190]
+  candidate_A2_local_clustering_caps: [0.92, 0.95, 0.97]
+  opposite_sign_suppression: [moderate, strong]
+  target_1607_A1_relay_TOM: 0.2811
+  target_1607_relay_A2_TOM: 0.1819
+  target_1607_path_strength: 0.8040
+  target_1607_A2_local_clustering: 0.9056
+  target_1607_high_degree_bridge_count: 0.0250
+  target_1607_opposite_sign_bridge_count: 0.0000
+
+observed_metric_adaptive_calibration:
+  structural_only: true
+  target_1607_A1_relay_TOM: 0.2811
+  target_1607_relay_A2_TOM: 0.1819
+  target_1607_path_strength: 0.8040
+  target_1607_relay_count: 28.125
+  target_1607_A2_local_clustering: 0.9056
+  stage1_min_candidates: 12
+  stage2_refinement_candidates_min: 4
+  observed_hard_windows:
+    A1_relay_mean_TOM: [0.260, 0.300]
+    relay_A2_mean_TOM: [0.170, 0.205]
+    median_A1_relay_A2_path_strength: [0.70, 0.85]
+    relay_count: [24, 31]
+    A2_local_clustering: [0.85, 0.97]
+    A_branch_background_cut_fraction_max: 0.12
+    seed_neighborhood_background_fraction_max: 0.01
+    high_degree_bridge_count_max: 0.15
+    opposite_sign_bridge_count_max: 0.20
+    branch_conductance_pass_fraction_min: 0.80
+    relay_structure_pass_fraction_min: 0.95

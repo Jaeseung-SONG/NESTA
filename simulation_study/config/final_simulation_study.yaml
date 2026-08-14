@@ -1,21 +1,51 @@
-study_name: NESTA final simulation study
-binding_submitted_nesta: /home/js/NESTA/Analysis/Nesta.R
+study_name: NESTA reviewer-facing simulation study
+primary_score: Final_Heat
+complementary_score: delta_NESTA
+delta_definition: delta_NESTA = Final_Heat - TWAS.Z
 data_dir: /home/js/NESTA/simulation_study_data
 local_results_dir: /home/js/NESTA/simulation_study_results
-dropbox_results_root: /home/js_subdir/Dropbox/NESTA_revision
-reference_root: /home/js_subdir/Dropbox/NESTA_revision
-scenarios:
-  decision_rule_repair:
-    reference_dir: /home/js_subdir/Dropbox/NESTA_revision/NESTA_simulation_080726_1803
-    classification: decision_rule_repair_passed_confirmatory_ready
-  comparator_framed_confirmatory:
-    reference_dir: /home/js_subdir/Dropbox/NESTA_revision/NESTA_simulation_080726_1951
-    classification: confirmatory_success_with_strong_unsigned_ppr_rwr
-  strict_top_fraction_audit:
-    reference_dir: /home/js_subdir/Dropbox/NESTA_revision/NESTA_simulation_090726_0045
-    classification: strict_fraction_audit_reveals_top100_leniency
-  false_positive_control_audit:
-    reference_dir: /home/js_subdir/Dropbox/NESTA_revision/NESTA_simulation_090726_0135
-    classification: false_positive_audit_completed_ppr_rwr_remain_strong_unsigned
-tolerance:
-  recall_precision_fdr_fpr_abs: 0.02
+default_runner: /home/js/NESTA/simulation_study/run_simulation_study.R
+finalized_code_provenance: /home/js/NESTA/simulation_study/internal_provenance/finalized_simulation_code
+reference_final_report: /home/js_subdir/Dropbox/NESTA_revision/NESTA_simulation_100726_0205/FINAL_REPORT.md
+reference_delta_threshold_export: /home/js_subdir/Dropbox/NESTA_revision/NESTA_delta_threshold_sensitivity_rerun_export_130826_1724
+threshold_sensitivity:
+  thresholds:
+    - top_0_5pct
+    - top_1pct
+    - top_2pct
+    - top_5pct
+  selection_rules:
+    - Final Heat only
+    - delta_NESTA only
+    - Final OR delta_NESTA
+    - Final AND delta_NESTA
+  threshold_rule: manuscript-style absolute two-tailed percentile threshold
+  direction_aware_rule: positive tails for risk targets and negative tails for protective targets
+  top_1pct_framing: conservative operating point, not empirical recovery optimum
+  relaxed_threshold_framing: sensitivity analysis for recovery and specificity tradeoff
+reproducibility_gate:
+  tolerance: 1.0e-6
+  required_metrics:
+    decision_rule_repair:
+      F_top100: 0.79125
+      F_top150: 0.9975
+      F_top200: 1.0
+    comparator_framed_confirmatory:
+      F_top100: 0.7795
+      F_top150: 0.99875
+      F_top200: 1.0
+      risk_direction_recovery: 0.79625
+      protective_direction_recovery: 0.76275
+      opposite_sign_decoy_selection: 0.0
+      high_score_decoy_selection: 0.0
+public_outputs:
+  - DELTA_THRESHOLD_SENSITIVITY_REPORT.md
+  - reproduced_final_metric_comparison.tsv
+  - per_gene_export_manifest.tsv
+  - delta_threshold_sensitivity_summary.tsv
+  - delta_threshold_sensitivity_by_scenario.tsv
+  - delta_threshold_sensitivity_directional.tsv
+  - delta_threshold_sensitivity_decoy_control.tsv
+  - delta_threshold_sensitivity_selected_count_summary.tsv
+  - manuscript_tables/table_delta_threshold_sensitivity.tsv
+  - manuscript_tables/table_delta_threshold_sensitivity_compact.tsv

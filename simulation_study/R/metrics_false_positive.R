@@ -1,3 +1,2 @@
-# Modular placeholder for the compact package.
-# Final accepted scenario implementations are preserved in reference_provenance/final_R/.
-# The reproducibility package verifies manuscript-relevant outputs against locked references.
+# Public reviewer-facing false-positive summaries are produced by the delta threshold workflow.
+# Finalized internal metric code is preserved under internal_provenance for deterministic reproduction.

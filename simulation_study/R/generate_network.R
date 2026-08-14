@@ -1,3 +1,2 @@
-# Modular placeholder for the compact package.
-# Final accepted scenario implementations are preserved in reference_provenance/final_R/.
-# The reproducibility package verifies manuscript-relevant outputs against locked references.
+# Public reviewer-facing workflow uses vendored finalized provenance code.
+# Network generation internals are preserved under internal_provenance for deterministic reproduction.

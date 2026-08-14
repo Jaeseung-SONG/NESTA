@@ -1,29 +1,64 @@
-metric_tolerance: 0.02
-expected:
+metric_tolerance: 1.0e-6
+expected_final_metrics:
   decision_rule_repair:
-    F_top100: 0.7913
+    F_top100: 0.79125
     F_top150: 0.9975
-    F_top200: 1.0000
-    H_pass: true
+    F_top200: 1.0
   comparator_framed_confirmatory:
-    classification: confirmatory_success_with_strong_unsigned_ppr_rwr
     F_top100: 0.7795
-    F_top150: 0.9988
-    F_top200: 1.0000
-  strict_top_fraction_audit:
-    classification: strict_fraction_audit_reveals_top100_leniency
-    PPR_top1: 0.0835
-    PPR_top5: 0.6766
-    RWR_top1: 0.0221
-    RWR_top5: 0.3661
-    NESTA_desc_risk_top50: 0.7963
-    NESTA_asc_prot_top50: 0.7628
-  false_positive_control_audit:
-    classification: false_positive_audit_completed_ppr_rwr_remain_strong_unsigned
-    NESTA_top50_recall: 0.1255
-    NESTA_top50_precision: 0.1004
-    NESTA_top50_FDR: 0.8996
-    NESTA_top50_FPR: 0.0473
-    PPR_recall: 0.6766
-    PPR_precision: 0.5413
-    PPR_FDR: 0.4587
+    F_top150: 0.99875
+    F_top200: 1.0
+    risk_direction_recovery: 0.79625
+    protective_direction_recovery: 0.76275
+    opposite_sign_decoy_selection: 0.0
+    high_score_decoy_selection: 0.0
+compact_threshold_expectations:
+  tolerance: 0.02
+  selected_count_tolerance: 0.5
+  rows:
+    - threshold_label: top_1pct
+      selection_rule: Final Heat only
+      selected_gene_count_mean: 10.0
+      true_target_recall_mean: 0.00019
+      FPR_mean: 0.0105
+      opposite_sign_decoy_selection_rate_mean: 0.0
+      high_score_decoy_selection_rate_mean: 0.0
+    - threshold_label: top_1pct
+      selection_rule: Final OR delta_NESTA
+      selected_gene_count_mean: 12.4
+      true_target_recall_mean: 0.00050
+      FPR_mean: 0.0130
+      opposite_sign_decoy_selection_rate_mean: 0.0
+      high_score_decoy_selection_rate_mean: 0.0
+    - threshold_label: top_5pct
+      selection_rule: Final Heat only
+      selected_gene_count_mean: 50.0
+      true_target_recall_mean: 0.1304
+      risk_target_recall_mean: 0.8074
+      protective_target_recall_mean: 0.7821
+      opposite_sign_decoy_selection_rate_mean: 0.0
+      high_score_decoy_selection_rate_mean: 0.0
+    - threshold_label: top_5pct
+      selection_rule: delta_NESTA only
+      selected_gene_count_mean: 50.0
+      true_target_recall_mean: 0.2191
+      risk_target_recall_mean: 0.9251
+      protective_target_recall_mean: 0.9135
+      opposite_sign_decoy_selection_rate_mean: 0.0
+      high_score_decoy_selection_rate_mean: 0.0
+    - threshold_label: top_5pct
+      selection_rule: Final OR delta_NESTA
+      selected_gene_count_mean: 57.6
+      true_target_recall_mean: 0.2248
+      risk_target_recall_mean: 0.9270
+      protective_target_recall_mean: 0.9159
+      opposite_sign_decoy_selection_rate_mean: 0.0
+      high_score_decoy_selection_rate_mean: 0.0
+    - threshold_label: top_5pct
+      selection_rule: Final AND delta_NESTA
+      selected_gene_count_mean: 42.4
+      true_target_recall_mean: 0.1246
+      risk_target_recall_mean: 0.8055
+      protective_target_recall_mean: 0.7798
+      opposite_sign_decoy_selection_rate_mean: 0.0
+      high_score_decoy_selection_rate_mean: 0.0

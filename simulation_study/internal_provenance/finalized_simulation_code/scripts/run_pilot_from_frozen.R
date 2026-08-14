@@ -1,0 +1,15 @@
+#!/usr/bin/env Rscript
+Sys.setenv(R_LIBS_USER = "/home/js/R/x86_64-pc-linux-gnu-library/4.1")
+source(file.path("/home/js/NESTA/simulation", "R", "utils.R"))
+source(project_file("R/pipeline.R"))
+verify_project_path()
+verify_binding_plan()
+lib <- readRDS(project_file("results/tom_library/tom_topology_library.rds"))
+reps <- readRDS(project_file("results/topology_qc/frozen_replicate_designs.rds"))
+set_run_status("IN_PROGRESS", "YES", "NO", "40 replicate pilot")
+pilot <- run_pilot(lib, reps, cores = 16)
+decision <- go_decision(list(pass = TRUE, reason = "topology_qc_passed"), pilot)
+set_run_status(decision$status, decision$pilot_started, decision$confirmatory_started, decision$reason)
+if (file.exists(project_file("results/study_decision.rds"))) unlink(project_file("results/study_decision.rds"))
+atomic_save_rds(list(topology = list(pass = TRUE, reason = "topology_qc_passed"),
+                     decision = decision), project_file("results/study_decision.rds"))

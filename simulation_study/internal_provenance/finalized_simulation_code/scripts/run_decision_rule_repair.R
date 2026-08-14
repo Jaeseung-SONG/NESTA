@@ -1,0 +1,3 @@
+#!/usr/bin/env Rscript
+Sys.setenv(R_LIBS_USER = "/home/js/R/x86_64-pc-linux-gnu-library/4.1")
+source(file.path("/home/js/NESTA/simulation", "R", "study_0708_decision_rule_repair.R"))

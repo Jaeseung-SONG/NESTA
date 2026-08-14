@@ -1,2 +1,2 @@
 #!/usr/bin/env Rscript
-cat("NESTA simulation_study package prepared. Run ../run_simulation_study.R --verify --report-dir <dir>\n")
+cat("NESTA simulation_study package prepared. Run Rscript run_simulation_study.R --report-dir <new_result_dir>\n")
