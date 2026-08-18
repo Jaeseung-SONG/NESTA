@@ -50,6 +50,7 @@ NESTA requires two sources of information:
 
 ### TWAS table
 
+NESTA expects the TWAS summary-statistics from **FUSION** (Gusev et al., Nat. Genet., 2016).
 The input can be an RDS data frame or a TSV/CSV text file and must contain:
 
 | Column | Description |
@@ -105,11 +106,11 @@ primary `Final.Heat` ranking.
 ## Reference-network modes
 
 - **Cell type-specific co-expression networks:** the preferred NESTA workflow.
-  Use an hdWGCNA/Seurat RDS directly, or use a lightweight edge list plus a
+  Use an hdWGCNA/Seurat RDS directly, or use a lightweight edge list with a
   mean-expression table as shown above.
 - **Topology-only reference networks:** generic networks such as a PPI can be
   supplied with `--Is_expression_network NO --Initial_weight_mode twas_only`.
-  This mode is useful for sensitivity analyses but does not provide the same
+  This mode is maybe useful for sensitivity analyses but does not provide the same
   cell type-specific context.
 
 ## Reproducibility resources
