@@ -22,8 +22,10 @@ cd NESTA
 bash tutorial/run_tutorial.sh
 ```
 
-See the [step-by-step tutorial](tutorial/README.md) for the input files,
-command-line options, expected outputs, and interpretation.
+See the [NESTA Tutorial with Toy Example](tutorial/README.md) for the input
+files, command-line options, expected outputs, and interpretation. An
+[interactive R notebook](tutorial/NESTA_toy_example.ipynb) is also provided
+for a line-by-line walkthrough.
 
 ## Installation
 
@@ -112,7 +114,7 @@ primary `Final.Heat` ranking.
 
 ## Reproducibility resources
 
-- [Quick-start tutorial](tutorial/README.md): small simulation-derived example
+- [NESTA Tutorial with Toy Example](tutorial/README.md): small simulation-derived example
   intended for learning and installation checks.
 - [Reviewer-facing simulation study](simulation_study/README.md): full
   threshold-sensitivity and reproducibility workflow used in the revision.

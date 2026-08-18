@@ -1,4 +1,4 @@
-# NESTA Quick-Start Tutorial
+# NESTA Tutorial with Toy Example
 
 This tutorial demonstrates the central NESTA workflow with a compact,
 simulation-derived dataset. It is designed to run in under a minute after the
@@ -18,6 +18,22 @@ cell type-specific mean-expression tables. The data are synthetic and contain
 no Graves' disease or participant-level data. See
 [`DATA_PROVENANCE.md`](DATA_PROVENANCE.md) for its relationship to the finalized
 simulation study.
+
+## Choose a format
+
+- **Interactive, line-by-line walkthrough:** open
+  [`NESTA_toy_example.ipynb`](NESTA_toy_example.ipynb) with an R Jupyter
+  kernel. The notebook inspects each input, runs NESTA for both cell types,
+  compares the rankings, and validates the result.
+- **One-command reproducibility check:** run `tutorial/run_tutorial.sh` as
+  described below.
+
+If an R kernel is not yet available in Jupyter, install it once from R:
+
+```r
+install.packages("IRkernel")
+IRkernel::installspec()
+```
 
 ## Run the tutorial
 
