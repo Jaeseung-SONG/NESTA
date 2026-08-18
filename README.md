@@ -40,6 +40,9 @@ The lightweight edge-list workflow and quick-start tutorial do not require
 Seurat or hdWGCNA. To read an existing hdWGCNA/Seurat expression-network RDS,
 also install the versions of `Seurat` and `hdWGCNA` used to create that object.
 
+- [Seurat](https://satijalab.org/seurat/) (Hao et al., Cell, 2021)
+- [hdWGCNA](https://smorabit.github.io/hdWGCNA/) (Morabito et al., Cell Reports Methods, 2023)
+
 ## Inputs
 
 NESTA requires two sources of information:
@@ -50,7 +53,10 @@ NESTA requires two sources of information:
 
 ### TWAS table
 
-NESTA expects the TWAS summary-statistics from **FUSION** (Gusev et al., Nat. Genet., 2016).
+NESTA expects the TWAS summary statistics from **FUSION**.
+
+- [FUSION/TWAS](https://gusevlab.org/projects/fusion/) (Gusev et al., Nature Genetics, 2016)
+
 The input can be an RDS data frame or a TSV/CSV text file and must contain:
 
 | Column | Description |
