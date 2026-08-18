@@ -1,49 +1,25 @@
-# Required packages
+# Core packages. Seurat and hdWGCNA are loaded only when an hdWGCNA/Seurat
+# expression-network object is supplied, keeping edge-list tutorials light.
+core.packages <- c("dplyr", "igraph", "diffuStats", "optparse", "data.table")
+missing.packages <- core.packages[!vapply(core.packages, requireNamespace, logical(1), quietly = TRUE)]
+if(length(missing.packages) > 0){
+  stop(
+    "Missing required R package(s): ", paste(missing.packages, collapse = ", "),
+    ". See the Installation section in README.md."
+  )
+}
 
-if(!require("BiocManager", quietly = TRUE))
-  install.packages("BiocManager")
-
-if(!require("Seurat", quietly = TRUE))
-  BiocManager::install("Seurat")
-
-if(!require("tidyverse", quietly = TRUE))
-  install.packages("tidyverse")
-
-if(!require("igraph", quietly = TRUE))
-  BiocManager("igraph")
-
-if(!require("devtools", quietly = TRUE))
-  install.packages("devtools")
-
-if(!require("hdWGCNA", quietly = TRUE))
-  BiocManager::install("hdWGCNA")
-
-if(!require("diffuStats", quietly = TRUE))
-  BiocManager::install("diffuStats")
-
-if(!require("optparse", quietly = TRUE))
-  install.packages("optparse")
-
-if(!require("data.table", quietly = TRUE))
-  install.packages("data.table")
-
-
-# Loading packages
-
-suppressMessages(library(Seurat))
-suppressMessages(library(tidyverse))
-suppressMessages(library(igraph))
-suppressMessages(library(devtools))
-suppressMessages(library(hdWGCNA))
-suppressMessages(library(diffuStats))
-suppressMessages(library(optparse))
-suppressMessages(library(data.table))
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(igraph))
+suppressPackageStartupMessages(library(diffuStats))
+suppressPackageStartupMessages(library(optparse))
+suppressPackageStartupMessages(library(data.table))
 
 # Required option list
 
 option_list = list(
   make_option("--TWAS_res", action = 'store', default = NA, type = 'character',
-              help = 'Rdata file for TWAS result'),
+              help = 'TWAS result data frame in .rds, .tsv, .txt, or .csv format'),
   make_option("--Reference_net", action = 'store', default = NA, type = 'character',
               help = 'Reference network file: .rds file or table format (.tsv/.csv)'),
   make_option("--Is_expression_network", action = 'store', default = 'TRUE', type = 'character',
@@ -77,6 +53,8 @@ option_list = list(
               help = 'Initial weight mode: auto, twas_only, or nesta_expression_weighted. Default auto preserves existing behavior.'),
   make_option("--Expression_reference_net", action = 'store', default = NA, type = 'character',
               help = 'Optional expression network RDS used only to compute cell-type mean expression when Is_expression_network is FALSE and Initial_weight_mode is nesta_expression_weighted.'),
+  make_option("--Mean_expression", action = 'store', default = NA, type = 'character',
+              help = 'Optional .tsv/.csv table with SYMBOL and Mean_expression columns. This provides lightweight expression-weighted initialization with an edge-list network.'),
   make_option("--Kernel_rds", action = 'store', default = NA, type = 'character',
               help = 'Optional precomputed diffuStats kernel RDS for the supplied reference network.'),
   make_option("--Save_kernel_rds", action = 'store', default = NA, type = 'character',
@@ -104,7 +82,7 @@ opt$Is_expression_network <- parse_logical_flag(opt$Is_expression_network, '--Is
 
 NESTA <- function(TWAS_res, Refer.net, Is.expression, Expression.slot,
                           grid.opt, out.dir, prefix, diffuse.method, Check.redundancy, TWAS.cut, edge_cutoff, Analysis_name,
-                          Initial.weight.mode = 'auto', Expression.reference.net = NA, Diffuse.nperm = 300,
+                          Initial.weight.mode = 'auto', Expression.reference.net = NA, Mean.expression.path = NA, Diffuse.nperm = 300,
                           Kernel.rds = NA, Save.kernel.rds = NA){
 
   # Checking for input file availability
@@ -150,9 +128,38 @@ NESTA <- function(TWAS_res, Refer.net, Is.expression, Expression.slot,
     Mean.expr.local
   }
 
+  read_mean_expression_table <- function(expr.path){
+    if(is.na(expr.path) || !file.exists(expr.path)){
+      stop("Error: Mean_expression table does not exist: ", expr.path)
+    }
+    Mean.expr.local <- data.table::fread(expr.path) %>% data.frame
+    required.columns <- c('SYMBOL', 'Mean_expression')
+    missing.columns <- setdiff(required.columns, colnames(Mean.expr.local))
+    if(length(missing.columns) > 0){
+      stop("Error: Mean_expression table is missing column(s): ", paste(missing.columns, collapse = ', '))
+    }
+    Mean.expr.local %>%
+      dplyr::transmute(SYMBOL = as.character(SYMBOL),
+                       Mean_expression = as.numeric(Mean_expression)) %>%
+      dplyr::filter(!is.na(SYMBOL), SYMBOL != '', is.finite(Mean_expression)) %>%
+      dplyr::group_by(SYMBOL) %>%
+      dplyr::summarise(Mean_expression = mean(Mean_expression), .groups = 'drop')
+  }
+
   if(Is.expression){
 
     cat('Loading Gene Expression-based Network\n')
+
+    expression.packages <- c("Seurat", "hdWGCNA")
+    missing.expression.packages <- expression.packages[
+      !vapply(expression.packages, requireNamespace, logical(1), quietly = TRUE)
+    ]
+    if(length(missing.expression.packages) > 0){
+      stop("Error: hdWGCNA/Seurat expression-network mode requires: ",
+           paste(missing.expression.packages, collapse = ', '))
+    }
+    suppressPackageStartupMessages(library(Seurat))
+    suppressPackageStartupMessages(library(hdWGCNA))
 
 
     Expr.dat <- readRDS(file = Refer.net)
@@ -188,10 +195,15 @@ NESTA <- function(TWAS_res, Refer.net, Is.expression, Expression.slot,
     }
 
     if(Initial.weight.mode == 'nesta_expression_weighted'){
-      if(is.na(Expression.reference.net) || !file.exists(Expression.reference.net)){
-        stop("Error: Expression_reference_net is required for nesta_expression_weighted mode with Is_expression_network FALSE.")
+      if(!is.na(Mean.expression.path)){
+        cat('Loading mean-expression table: ', Mean.expression.path, '\n')
+        Mean.expr <- read_mean_expression_table(Mean.expression.path)
+      }else{
+        if(is.na(Expression.reference.net) || !file.exists(Expression.reference.net)){
+          stop("Error: provide Mean_expression or Expression_reference_net for nesta_expression_weighted mode with Is_expression_network FALSE.")
+        }
+        Mean.expr <- read_mean_expression(Expression.reference.net, Expression.slot)
       }
-      Mean.expr <- read_mean_expression(Expression.reference.net, Expression.slot)
     }
 
   }
@@ -210,7 +222,17 @@ NESTA <- function(TWAS_res, Refer.net, Is.expression, Expression.slot,
 
   test.cutoff <- TWAS.cut
 
-  TWAS.res <- readRDS(file = TWAS_res) %>%
+  read_twas_results <- function(path){
+    if(grepl('\\.rds$', path, ignore.case = TRUE)){
+      readRDS(path)
+    }else if(grepl('\\.(tsv|txt|csv)(\\.gz)?$', path, ignore.case = TRUE)){
+      data.table::fread(path) %>% data.frame
+    }else{
+      stop('Error: TWAS_res must be an .rds, .tsv, .txt, or .csv file.')
+    }
+  }
+
+  TWAS.res <- read_twas_results(TWAS_res) %>%
     dplyr::filter(!is.na(SYMBOL),
                   SYMBOL != '',
                   is.finite(TWAS.Z),
@@ -223,8 +245,9 @@ NESTA <- function(TWAS_res, Refer.net, Is.expression, Expression.slot,
 
   tmp.score <- tmp.score %>%
     dplyr::left_join(TWAS.res, by = 'SYMBOL') %>%
-    dplyr::mutate(weight = if_else(is.na(TWAS.Z), 0, TWAS.Z)) %>%
-    dplyr::select(SYMBOL, weight)
+    dplyr::mutate(TWAS.Z = if_else(is.na(TWAS.Z), 0, TWAS.Z),
+                  weight = TWAS.Z) %>%
+    dplyr::select(SYMBOL, TWAS.Z, weight)
 
   cat('Reference network nodes: ', nrow(tmp.score), '\n')
   cat('Nodes with TWAS-derived nonzero initial weight: ', sum(tmp.score$weight != 0), '\n')
@@ -399,10 +422,20 @@ NESTA <- function(TWAS_res, Refer.net, Is.expression, Expression.slot,
   }
 
 
-  F.score$Analysis_name <- rep(Analysis_name, nrow(F.score))
+  if(grid.opt){
+    F.score <- F.score %>%
+      dplyr::rename(SYMBOL = node_id, Final.Heat = F.score) %>%
+      dplyr::left_join(Init.score %>% dplyr::select(SYMBOL, TWAS.Z), by = 'SYMBOL')
+  }
 
+  F.score <- F.score %>%
+    dplyr::mutate(delta_NESTA = Final.Heat - TWAS.Z,
+                  Analysis_name = Analysis_name)
 
-  write_rds(F.score, file = paste0(out.dir, prefix, '_scores.rds'))
+  output.rds <- file.path(out.dir, paste0(prefix, '_scores.rds'))
+  output.tsv <- file.path(out.dir, paste0(prefix, '_scores.tsv'))
+  saveRDS(F.score, file = output.rds)
+  data.table::fwrite(F.score, file = output.tsv, sep = '\t')
 
 
   if(Check.redundancy){
@@ -415,7 +448,7 @@ NESTA <- function(TWAS_res, Refer.net, Is.expression, Expression.slot,
         tmp.score <- F.score %>%
           dplyr::filter(., method == j)
 
-        corr.val <- cor(x = tmp.score$F.score, y = Init.score$comb.weight)
+                  corr.val <- cor(x = tmp.score$Final.Heat, y = Init.score$comb.weight)
 
         corr_vec <- corr_vec %>% append(., corr.val)
 
@@ -455,5 +488,5 @@ NESTA(opt$TWAS_res, opt$Reference_net, opt$Is_expression_network,
               opt$Expression_slot,  opt$Diffuse_grid, opt$out_dir,
               opt$prefix, opt$Diffuse_method, opt$check_bias,
               opt$TWAS_cutoff, opt$edge_cutoff, opt$Analysis_name,
-              opt$Initial_weight_mode, opt$Expression_reference_net, opt$Diffuse_nperm,
+              opt$Initial_weight_mode, opt$Expression_reference_net, opt$Mean_expression, opt$Diffuse_nperm,
               opt$Kernel_rds, opt$Save_kernel_rds)

@@ -1,0 +1,11 @@
+cell_type	rank	SYMBOL
+Cell_type_A	1	GENE01
+Cell_type_A	2	GENE09
+Cell_type_A	3	GENE08
+Cell_type_A	4	GENE02
+Cell_type_A	5	GENE03
+Cell_type_B	1	GENE10
+Cell_type_B	2	GENE17
+Cell_type_B	3	GENE16
+Cell_type_B	4	GENE11
+Cell_type_B	5	GENE01
